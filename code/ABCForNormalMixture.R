@@ -21,6 +21,7 @@ source("PostProcessing.R")
 ### Parameter choice ####################################################
 
 ## Dimension (dim = 1 1-D ; dim = 2 2-D)
+
 dim = 1
 
 ## Dataset ( data_choice = 0 default ; data_choice = 1 personalized data)
@@ -58,7 +59,12 @@ if (dim == 1){
   n_components = 2
 }
 
-if (dim == 2)
+if (dim == 2){
+  mean = list(c(0,0),c(0,0))
+  cov = list(matrix(c(1,0,0,1),2,2),matrix(c(1,0,0,1),2,2))
+  weight = c(0.5,0.5)
+  n_components = 2
+}
   
 ########################################################################
 ### running the ABC sampler ############################################
@@ -67,7 +73,7 @@ if (dim == 1)
   SampledPosteriorWithABC = RejectionSamplingABC_1D(data, iter, sum_stat, c(mean, var, weight, n_components))
 
 if (dim == 2)
-  SampledPosteriorWithABC = RejectionSamplingABC_2D(data, iter, sum_stat, c(mean, var, weight, n_components))
+  SampledPosteriorWithABC = RejectionSamplingABC_2D(data, iter, sum_stat, list(mean, cov, weight, n_components))
 
 ########################################################################
 ### Post-Processing ####################################################
