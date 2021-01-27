@@ -12,8 +12,6 @@
 
 set.seed(42)
 
-source("summaryStatisticsImplementation.R")
-
 library(gtools)
 #library(Boom)
 library(transport)

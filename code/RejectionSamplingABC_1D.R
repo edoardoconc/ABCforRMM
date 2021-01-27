@@ -17,8 +17,10 @@ set.seed(42)
 
 source("Model_Likelihood_1D.R")
 source("NormalInverseGammaPrior.R")
+source("RepulsivePrior.R")
 
-RejectionSamplingABC_1D <- function(Yobs, iter, sum_stat, init) {
+
+RejectionSamplingABC_1D <- function(Yobs, iter, sum_stat, init, prior_type) {
   
   #Allocation mc
   meanSample              = list(0)
@@ -63,7 +65,7 @@ RejectionSamplingABC_1D <- function(Yobs, iter, sum_stat, init) {
 
   for(i in 2:iter){
 
-    ThetaProposed = NormalInverseGammaPrior()
+    ThetaProposed = RepulsivePrior(prior_type)
     
     Y = Model_Likelihood_1D(length(Yobs),ThetaProposed)
     

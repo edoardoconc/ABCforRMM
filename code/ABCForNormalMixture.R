@@ -41,6 +41,12 @@ if (data_choice == 1)
 
 sum_stat = 0
 
+## Prior choice (type of prior available for the 1-D case)
+# non-repulsive: "NormalInverseGamma"
+# repulsive: "StraussProcess", "PenttinenProcess", "DiggleGrattonProcess"
+
+prior_type = "NormalInverseGamma"
+
 ## Accepting Tollerance on the distance 
 # usually we want to accept 5-10%
 
@@ -70,7 +76,7 @@ if (dim == 2){
 ### running the ABC sampler ############################################
 
 if (dim == 1)
-  SampledPosteriorWithABC = RejectionSamplingABC_1D(data, iter, sum_stat, c(mean, var, weight, n_components))
+  SampledPosteriorWithABC = RejectionSamplingABC_1D(data, iter, sum_stat, c(mean, var, weight, n_components), prior_type)
 
 if (dim == 2)
   SampledPosteriorWithABC = RejectionSamplingABC_2D(data, iter, sum_stat, list(mean, cov, weight, n_components))
@@ -78,6 +84,6 @@ if (dim == 2)
 ########################################################################
 ### Post-Processing ####################################################
 
-PostProcessing(d,tol)
+PostProcessing(SampledPosteriorWithABC, d, tol)
 
 ########################################################################
