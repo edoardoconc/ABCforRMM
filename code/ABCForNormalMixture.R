@@ -1,4 +1,4 @@
-setwd('/home/edoc/ABCforRMM/5tuttoRandomConSummaryStats')
+setwd('/home/edoc/ABCforRMM/code')
 rm(list = ls())
 set.seed(42)               
 
@@ -29,7 +29,7 @@ dim = 1
 data_choice = 0
 
 if (data_choice == 0)
-  data = DataGeneration(dim)
+  data = DataGeneration(dim,"tds",1000,1,1,mean=NULL,sd=NULL,dof=NULL,sigma=NULL,mean2d=NULL,var2d=NULL)
 # see function DataGEneration.R to modify other parameter
 
 if (data_choice == 1)
@@ -39,7 +39,7 @@ if (data_choice == 1)
 # sum_stat = 0 use Wasserstein distance to evaluate the distance between data and proposed approximation
 # sum_stat = 1 use Summary statistics to evaluate the distance between data and proposed approximation
 
-sum_stat = 0
+sum_stat = 1
 
 ## Prior choice (type of prior available for the 1-D case)
 # non-repulsive: "NIG"
@@ -54,7 +54,7 @@ tol = 0.005
 
 ## Number of iteration
 
-iter = 15000
+iter = 200000
 
 ## Initialization of the Markov chains
 

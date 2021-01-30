@@ -30,9 +30,16 @@ fx = matrix(data = NA, nrow = length(usare[,1]), ncol = 10000, byrow = TRUE,
             dimnames = NULL)
 
 # da generalizzare
-for(i in 1:length(usare[,1])){
-  fx[i,] =(unlist(usare[i,3])[1])*dnorm(x, unlist(usare[i,1])[1], unlist(usare[i,2])[1]) + (unlist(usare[i,3])[2])*dnorm(x, unlist(usare[i,1])[2], unlist(usare[i,2])[2])
+for (j in 1:k){
+
+  for(i in 1:length(usare[,1])){
+
+    fx[i,] = fx[i,] + (unlist(usare[i,3])[j])*dnorm(x, unlist(usare[i,1])[j], unlist(usare[i,2])[j]) 
+    
+  }
+
 }
+
 avgOutLikelihood = colMeans(fx) 
 plot(x,avgOutLikelihood,type='l',ylim = c(0,0.14))
 par(new=TRUE)
