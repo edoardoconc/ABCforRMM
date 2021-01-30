@@ -42,10 +42,10 @@ if (data_choice == 1)
 sum_stat = 0
 
 ## Prior choice (type of prior available for the 1-D case)
-# non-repulsive: "NormalInverseGamma"
+# non-repulsive: "NIG"
 # repulsive: "StraussProcess", "PenttinenProcess", "DiggleGrattonProcess"
 
-prior_type = "NormalInverseGamma"
+prior_type = "NIG"
 
 ## Accepting Tollerance on the distance 
 # usually we want to accept 5-10%
