@@ -1,7 +1,7 @@
 #setwd("~/Documents/1university/Magistrale/Anno 2/Primo Semestre/Bayesian Statistics/Project/RCode")
 #rm(list = ls())
 
-set.seed(42)
+#set.seed(42)
 
 ############ List of summary stats: 1 for mean, 2 for standard deviation, 3 for ... 
 

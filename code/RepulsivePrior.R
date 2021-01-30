@@ -1,5 +1,5 @@
 
-set.seed(42)
+#set.seed(42)
 
 #source("computePrior.R")
 #source("KernelComputation.R")

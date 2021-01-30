@@ -1,5 +1,5 @@
 
-set.seed(42)
+#set.seed(42)
 
 ############ List of summary stats: 1 for mean, 2 for standard deviation, 3 for ... 
 

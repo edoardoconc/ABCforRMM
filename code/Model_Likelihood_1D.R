@@ -2,7 +2,7 @@
 # We use the Theta proposed to generate a new set of data from the model
 # Y|θ ∼  sum(k=1:K){ w_k * N(μ_k , σ_k^2 )} for i = 1, . . . , n
 
-set.seed(42)
+#set.seed(42)
 
 
 Model_Likelihood_1D <- function(numPts,ThetaProposed) { 

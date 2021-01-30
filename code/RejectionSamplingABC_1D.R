@@ -13,7 +13,7 @@
 ## 4. accept θ i if d(η(z i ), η(y obs )) ≤ tol                                   ##
 ####################################################################################
 
-set.seed(42)
+#set.seed(42)
 
 source("Model_Likelihood_1D.R")
 source("NormalInverseGammaPrior.R")

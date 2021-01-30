@@ -47,11 +47,6 @@ sum_stat = 1
 
 prior_type = "NIG"
 
-## Accepting Tollerance on the distance 
-# usually we want to accept 5-10%
-
-tol = 0.005
-
 ## Number of iteration
 
 iter = 200000
@@ -83,6 +78,11 @@ if (dim == 2)
 
 ########################################################################
 ### Post-Processing ####################################################
+
+## Accepting Tollerance on the distance 
+# usually we want to accept 5-10%
+
+tol = 0.005
 
 PostProcessing(SampledPosteriorWithABC, d, tol)
 

@@ -12,7 +12,7 @@
 ## order to mantain more flexibility on the posterior inference                   ##
 ## 4. accept θ i if d(η(z i ), η(y obs )) ≤ tol                                   ##
 ####################################################################################
-set.seed(42)
+#set.seed(42)
 
 source("Model_Likelihood_2D.R")
 source("NormalInverseWishartPrior.R")
