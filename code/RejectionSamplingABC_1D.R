@@ -54,9 +54,9 @@ RejectionSamplingABC_1D <- function(Yobs, iter, sum_stat, init, prior_type) {
     SampleVarDist           = vector (length = iter, mode = "numeric")
     SampleQuantileDist      = vector (length = iter, mode = "numeric")
 
-    SampleMeanDist[1]       = computeNormOfSummaryStat(dataGeneration(length(Yobs),ThetaProposedZero),Yobs,1)
-    SampleVarDist[1]        = computeNormOfSummaryStat(dataGeneration(length(Yobs),ThetaProposedZero),Yobs,2)
-    SampleQuantileDist[1]   = computeNormOfSummaryStat(dataGeneration(length(Yobs),ThetaProposedZero),Yobs,3)
+    SampleMeanDist[1]       = computeNormOfSummaryStat(Model_Likelihood_1D(length(Yobs),ThetaProposedZero),Yobs,1)
+    SampleVarDist[1]        = computeNormOfSummaryStat(Model_Likelihood_1D(length(Yobs),ThetaProposedZero),Yobs,2)
+    SampleQuantileDist[1]   = computeNormOfSummaryStat(Model_Likelihood_1D(length(Yobs),ThetaProposedZero),Yobs,3)
 
   }
   

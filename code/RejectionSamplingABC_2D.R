@@ -27,14 +27,14 @@ RejectionSamplingABC <- function(Yobs, iter, sum_stat, init) {
 
     total[[1]] = list("sampledMean" = init[[1]],"SampledSigma" = init[[2]],
                       "sampledWeight" = init[[3]], "sampledNumOfMixComp" = init[[4]], 
-                      "SampleQuantileDist" = computeNormOfSummaryStat(dataGeneration(length(Yobs),init),Yobs,3))# modifica
+                      "SampleQuantileDist" = computeNormOfSummaryStat(Model_Likelihood_2D(length(Yobs),init),Yobs,3))# modifica
 
   }
   if (sum_stat == 1){
 
     total[[1]] = list("sampledMean" = init[[1]],"SampledSigma" = init[[2]],
                       "sampledWeight" = init[[3]], "sampledNumOfMixComp" = init[[4]], 
-                      "SampleQuantileDist" = computeNormOfSummaryStat(dataGeneration(length(Yobs),init),Yobs,3))
+                      "SampleQuantileDist" = computeNormOfSummaryStat(Model_Likelihood_2D(length(Yobs),init),Yobs,3))
 
   }
   
@@ -44,13 +44,13 @@ RejectionSamplingABC <- function(Yobs, iter, sum_stat, init) {
 
     ThetaProposed <- NormalInverseWishardPrior()
 
-    Y <- dataGeneration(length(Yobs),ThetaProposed)
+    Y <- Model_Likelihood_2D(length(Yobs),ThetaProposed)
 
     if (sum_stat == 0){
 
       total[[1]] = list("sampledMean" = init[[1]],"SampledSigma" = init[[2]],
                         "sampledWeight" = init[[3]], "sampledNumOfMixComp" = init[[4]], 
-                        "SampleQuantileDist" = computeNormOfSummaryStat(dataGeneration(length(Yobs),init),Yobs,3))
+                        "SampleQuantileDist" = computeNormOfSummaryStat(Model_Likelihood_2D(length(Yobs),init),Yobs,3))
 
     }
     if (sum_stat == 1){

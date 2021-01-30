@@ -17,7 +17,7 @@ library(transport)
 library(MCMCpack)
 
 #The Prior Distribution is:
-NormalInverseWishartprior <- function(){
+NormalInverseWishartPrior <- function(){
 
   lambda = 2
   K <- rpois(1, lambda)+1
@@ -45,7 +45,7 @@ NormalInverseWishartprior <- function(){
 
     for(i in 2:K){
 
-        propMean[[i]] = mvrnorm(1, mu, proprSigma[[i]]/k0 )
+      propMean[[i]] = mvrnorm(1, mu, proprSigma[[i]]/k0 )
 
     }
 

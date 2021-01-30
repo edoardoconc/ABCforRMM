@@ -80,6 +80,6 @@ if(type == "DiggleGrattonProcess"){
   return(list(propMean,propVar,propWeight,K))
 }
 
-return(NormalInverseGammaPrior())
+return(NormalInverseGamma())
 
 }
