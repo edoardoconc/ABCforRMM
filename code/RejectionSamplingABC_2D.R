@@ -15,7 +15,7 @@
 set.seed(42)
 
 source("Model_Likelihood_2D.R")
-source("NormalInverseWishardPrior.R")
+source("NormalInverseWishartPrior.R")
 source("summaryStatisticsImplementation_2D.R")
 
 
@@ -42,7 +42,7 @@ RejectionSamplingABC <- function(Yobs, iter, sum_stat, init) {
 
   for(i in 2:iter){
 
-    ThetaProposed <- NormalInverseWishardPrior()
+    ThetaProposed <- NormalInverseWishartPrior()
 
     Y <- Model_Likelihood_2D(length(Yobs),ThetaProposed)
 
