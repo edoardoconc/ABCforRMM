@@ -26,10 +26,11 @@ k = which(table(unlist(sK)) == m)
 
 usare<-out[which(out$sampledNumOfMixComp == k),]
 x= seq(-12, 12, length.out=10000 )
-fx = matrix(data = NA, nrow = length(usare[,1]), ncol = 10000, byrow = TRUE,
+vect = rep(0,10000*length(usare))
+fx = matrix(data = vect, nrow = length(usare[,1]), ncol = 10000, byrow = TRUE,
             dimnames = NULL)
 
-# da generalizzare
+# da generalizzare  
 for (j in 1:k){
 
   for(i in 1:length(usare[,1])){
@@ -41,9 +42,9 @@ for (j in 1:k){
 }
 
 avgOutLikelihood = colMeans(fx) 
-plot(x,avgOutLikelihood,type='l',ylim = c(0,0.14))
-par(new=TRUE)
-lines(density(Yobs), col="red")
+#plot(x,avgOutLikelihood,type='l',ylim = c(0,0.14))
+#par(new=TRUE)
+#lines(density(data), col="red")
 
   
   par(mfrow=c(1,4),cex=0.25)
@@ -56,7 +57,7 @@ lines(density(Yobs), col="red")
   lines(density(a[1:length(a)]),main="",xlab="",cex.main=4,cex.axis=4,ylab="",mgp=c(1,2,0),col="navyblue",lwd=2)
   plot(table(unlist(sK)),col = "blue4", lwd=10,main="Frequency of K",cex.main=4,cex.axis=4,ylab="",mgp=c(1,2,0),ylim = c(0,max(table(unlist(sK)))+10))
   
-  plot(density(Yobs),main = "Density Estimate",cex.main=4,xlab="",cex.axis=4,ylab="",mgp=c(1,2,0))
+  plot(density(data),main = "Density Estimate",cex.main=4,xlab="",cex.axis=4,ylab="",mgp=c(1,2,0))
   lines(x,avgOutLikelihood,type='l',col = "red")
   
 

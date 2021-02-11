@@ -13,7 +13,7 @@ library(MCMCpack)
 library(spatstat)
 
 #The Prior Distribution is:
-Prior_Distr <- function(type,lambda=2,shape=0.5,scale=1,mu=0,sigma=7,beta=NULL,W=owin(c(-10,10),c(-10,10)),gamma=1,R=0.3,delta=0.85,rho=0.9,rand_lambda=FALSE,min_lambda=1,max_lambda=8){
+Prior_Distr <- function(type,lambda=2,shape=0.5,scale=1,mu=0,sigma=7,beta=NULL,W=owin(c(-10,10),c(-10,10)),gamma=1,R=0.3,delta=0.85,rho=0.9,rand_lambda=TRUE,min_lambda=1,max_lambda=8){
  
   if(type=="NIG"){
     #Default case:
@@ -67,7 +67,7 @@ Prior_Distr <- function(type,lambda=2,shape=0.5,scale=1,mu=0,sigma=7,beta=NULL,W
     
     while (length(outStrauss$x) == 0 ) {
       
-      outStrauss <- rStrauss(beta,W)
+      outStrauss <- rStrauss(beta=beta,W=W)
       
     }
     
@@ -105,7 +105,7 @@ Prior_Distr <- function(type,lambda=2,shape=0.5,scale=1,mu=0,sigma=7,beta=NULL,W
     
     while (length(outPenttinen$x) == 0 ) {
       
-      outPenttinen <- rPenttinen(beta,gamma, R, W)
+      outPenttinen <- rPenttinen(beta=beta, gamma=gamma,R=R,W=W)
       
     }
     
@@ -139,11 +139,11 @@ Prior_Distr <- function(type,lambda=2,shape=0.5,scale=1,mu=0,sigma=7,beta=NULL,W
     #delta = 0.85
     #rho=0.9
     
-    outDiggleGratton <- rDiggleGratton(beta=beta,delta=delta,rh=rho,W=W)
+    outDiggleGratton <- rDiggleGratton(beta=beta,delta=delta,rho=rho,W=W)
     
     while (length(outDiggleGratton$x) == 0 ) {
       
-      outDiggleGratton <- rDiggleGratton(beta,delta,rho,W)
+      outDiggleGratton <- rDiggleGratton(beta=beta,delta=delta,rho=rho,W=W)
       
     }
     
