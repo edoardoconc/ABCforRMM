@@ -67,7 +67,7 @@ RejectionSamplingABC_1D <- function(Yobs, iter, sum_stat, init, prior_type) {
   for(i in 2:iter){
 
     #ThetaProposed = RepulsivePrior(prior_type)
-    ThetaProposed = Prior_Distr(prior_type)
+    ThetaProposed = Prior_Distr(prior_type, )
     
     Y = Model_Likelihood_1D(length(Yobs),ThetaProposed)
     

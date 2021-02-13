@@ -1,6 +1,6 @@
 # Generation of the default dataset
 
-library(extraDistr)
+#library(extraDistr)
 DataGeneration <- function(dimension,type,n,components,weights,mean=NULL,sd=NULL,dof=NULL,sigma=NULL,mean2d=NULL,var2d=NULL) {
   
   if (type!="gauss" & type!="tds" & type!="laplace"){
@@ -80,7 +80,7 @@ DataGeneration <- function(dimension,type,n,components,weights,mean=NULL,sd=NULL
       for (i in 1:n) {
 
         dummy<-sample.int(components,1,prob=weights)
-        Yobs[i]=rnorm(1,mean[dummy],sigma[dummy])
+        Yobs[i] = extraDistr::rlaplace(1,mean[dummy],sigma[dummy])
 
       }
       
@@ -117,13 +117,19 @@ DataGeneration <- function(dimension,type,n,components,weights,mean=NULL,sd=NULL
     for (i in 1:n) {
       
       dummy<-sample.int(components,1,prob=weights)
-
+      if(type=="gauss"){
         Yobs[i,]=mvrnorm(1,mean2d[[dummy]], var2d[[dummy]])
-
+        
+      }
+      if (type=="laplace"){
+        Yobs[i,]=LaplacesDemon::rmvl(1, mu=mean2d[[dummy]], Sigma=var2d[[dummy]])
+      }
+      if (type=="tds"){
+        Yobs[i,]= LaplacesDemon::rmvt(1, mu=mean2d[[dummy]], S=var2d[[dummy]], df=dof)
+      }
     }
 
   }
-  
   return(Yobs)
   
 }

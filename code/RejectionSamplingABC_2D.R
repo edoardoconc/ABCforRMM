@@ -12,54 +12,38 @@
 ## order to mantain more flexibility on the posterior inference                   ##
 ## 4. accept θ i if d(η(z i ), η(y obs )) ≤ tol                                   ##
 ####################################################################################
-#set.seed(42)
+set.seed(42)
 
 source("Model_Likelihood_2D.R")
 source("NormalInverseWishartPrior.R")
 source("summaryStatisticsImplementation_2D.R")
+source("RepulsivePrior2D.R")
 
-
-RejectionSamplingABC <- function(Yobs, iter, sum_stat, init) {
+RejectionSamplingABC_2D <- function(Yobs, iter, sum_stat, init,prior_type) {
 
   total <-list(0) 
   
-  if (sum_stat == 0){ 
 
-    total[[1]] = list("sampledMean" = init[[1]],"SampledSigma" = init[[2]],
+  total[[1]] = list("sampledMean" = init[[1]],"SampledSigma" = init[[2]],
                       "sampledWeight" = init[[3]], "sampledNumOfMixComp" = init[[4]], 
-                      "SampleQuantileDist" = computeNormOfSummaryStat(Model_Likelihood_2D(length(Yobs),init),Yobs,3))# modifica
+                      "SampleQuantileDist" = computeNormOfSummaryStat(Model_Likelihood_2D(length(Yobs),init),Yobs,sum_stat))
 
-  }
-  if (sum_stat == 1){
-
-    total[[1]] = list("sampledMean" = init[[1]],"SampledSigma" = init[[2]],
-                      "sampledWeight" = init[[3]], "sampledNumOfMixComp" = init[[4]], 
-                      "SampleQuantileDist" = computeNormOfSummaryStat(Model_Likelihood_2D(length(Yobs),init),Yobs,3))
-
-  }
+  
   
   pb <- txtProgressBar(min = 1, max = iter, initial = 1, style = 3)
 
   for(i in 2:iter){
 
-    ThetaProposed <- NormalInverseWishartPrior()
+    ThetaProposed <- RepulsivePrior2D(prior_type)
 
     Y <- Model_Likelihood_2D(length(Yobs),ThetaProposed)
 
-    if (sum_stat == 0){
-
-      total[[1]] = list("sampledMean" = init[[1]],"SampledSigma" = init[[2]],
-                        "sampledWeight" = init[[3]], "sampledNumOfMixComp" = init[[4]], 
-                        "SampleQuantileDist" = computeNormOfSummaryStat(Model_Likelihood_2D(length(Yobs),init),Yobs,3))
-
-    }
-    if (sum_stat == 1){
 
       total[[i]] = list("sampledMean" = ThetaProposed[[1]],"SampledSigma" = ThetaProposed[[2]],
                                  "sampledWeight" =ThetaProposed[[3]], "sampledNumOfMixComp" =ThetaProposed[[4]], 
-                                  "SampleQuantileDist" = computeNormOfSummaryStat(Y,Yobs,3))
+                                  "SampleQuantileDist" = computeNormOfSummaryStat(Y,Yobs,sum_stat))
 
-    }
+
 
     setTxtProgressBar(pb, i)
 
