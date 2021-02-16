@@ -3,10 +3,10 @@
 <details open="open">
   <summary>Table of Contents</summary>
   <ol>
-    <li>< "#about-the-project">About The Project</a> </li>
-    <li>< "#usedPackages">Packages</a></li>
-    <li>< "#structre-of-code">Repo Structure</a></li>
-    <li>< "#results">Results Overview</a></li>
+    <li><a> About The Project</a> </li>
+    <li><a> Packages</a></li>
+    <li><a> Repo Structure</a></li>
+    <li><a> Results Overview</a></li>
   </ol>
 </details>
 
