@@ -35,9 +35,15 @@ if (data_choice == 0){
 if (data_choice == 1)
   data = load(file = '...') # insert data
 
-## Summary statistic 
+## Summary statistic
+#If 1-D:
 # sum_stat = 0 use Wasserstein distance to evaluate the distance between data and proposed approximation
 # sum_stat = 1 use Summary statistics to evaluate the distance between data and proposed approximation
+
+#If 2-D:
+# sum_stat = 2 use 2-D Wasserstein distance to evaluate the distance between data and proposed approximation
+# sum_stat = 3 use the sum of the projection on the axis of the L1 norm between the 20 equispaced quantiles
+# sum_stat = 4 use Sliced Wasserstein distance
 
 sum_stat = 1
 
@@ -45,7 +51,7 @@ sum_stat = 1
 # non-repulsive: "NIG"
 # repulsive: "StraussProcess", "PenttinenProcess", "DiggleGrattonProcess"
 
-prior_type = "NIG"
+prior_type = "StraussProcess"
 
 
 ## Number of iteration
@@ -84,7 +90,10 @@ if (dim == 2)
 # usually we want to accept 5-10%
 
 tol = 0.01
-
+if (dim == 1){
 PostProcessing_1d(SampledPosteriorWithABC,Yobs=data, tol=tol, sum_stat=sum_stat)
-
+}
+if (dim == 2){
+PostProcessing_2d(SampledPosteriorWithABC,Yobs=data, tol=tol, k=2)
+}
 ########################################################################

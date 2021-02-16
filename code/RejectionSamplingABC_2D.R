@@ -36,7 +36,7 @@ RejectionSamplingABC_2D <- function(Yobs, iter, sum_stat, init,prior_type) {
 
   total[[1]] = list("sampledMean" = init[[1]],"SampledSigma" = init[[2]],
                       "sampledWeight" = init[[3]], "sampledNumOfMixComp" = init[[4]], 
-                      "SampleQuantileDist" = computeNormOfSummaryStat2D(Model_Likelihood_2D(length(Yobs),init),Yobs,sum_stat))
+                      "SampleQuantileDist" = computeNormOfSummaryStat2D(Model_Likelihood_2D(dim(Yobs)[1],init),Yobs,sum_stat))
 
   
   
@@ -46,7 +46,7 @@ RejectionSamplingABC_2D <- function(Yobs, iter, sum_stat, init,prior_type) {
 
     ThetaProposed <- RepulsivePrior2D(prior_type)
 
-    Y <- Model_Likelihood_2D(length(Yobs),ThetaProposed)
+    Y <- Model_Likelihood_2D(dim(Yobs)[1],ThetaProposed)
 
 
       total[[i]] = list("sampledMean" = ThetaProposed[[1]],"SampledSigma" = ThetaProposed[[2]],
