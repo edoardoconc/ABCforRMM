@@ -19,6 +19,16 @@ source("NormalInverseWishartPrior.R")
 source("summaryStatisticsImplementation_2D.R")
 source("RepulsivePrior2D.R")
 
+#Arguments:
+#Yobs:                observed data
+#iter:                number of iterations
+#sum_stat:            1 for the distance on the summary statistics and 0 for the wasserstein distance
+#init:                initial value
+#prior_type:          possible types: non-repulsive: "NIG", repulsive: "StraussProcess", "PenttinenProcess", "DiggleGrattonProcess"
+
+#Value:
+#it returns a data frame with the sampled mean, variance, weights, number of mixed components, selected distances. 
+
 RejectionSamplingABC_2D <- function(Yobs, iter, sum_stat, init,prior_type) {
 
   total <-list(0) 
@@ -26,7 +36,7 @@ RejectionSamplingABC_2D <- function(Yobs, iter, sum_stat, init,prior_type) {
 
   total[[1]] = list("sampledMean" = init[[1]],"SampledSigma" = init[[2]],
                       "sampledWeight" = init[[3]], "sampledNumOfMixComp" = init[[4]], 
-                      "SampleQuantileDist" = computeNormOfSummaryStat(Model_Likelihood_2D(length(Yobs),init),Yobs,sum_stat))
+                      "SampleQuantileDist" = computeNormOfSummaryStat2D(Model_Likelihood_2D(length(Yobs),init),Yobs,sum_stat))
 
   
   
@@ -41,7 +51,7 @@ RejectionSamplingABC_2D <- function(Yobs, iter, sum_stat, init,prior_type) {
 
       total[[i]] = list("sampledMean" = ThetaProposed[[1]],"SampledSigma" = ThetaProposed[[2]],
                                  "sampledWeight" =ThetaProposed[[3]], "sampledNumOfMixComp" =ThetaProposed[[4]], 
-                                  "SampleQuantileDist" = computeNormOfSummaryStat(Y,Yobs,sum_stat))
+                                  "SampleQuantileDist" = computeNormOfSummaryStat2D(Y,Yobs,sum_stat))
 
 
 

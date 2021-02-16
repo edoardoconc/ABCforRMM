@@ -10,14 +10,14 @@
 ## K − 1 ∼ Poi(λ)                                          ##
 #############################################################
 
-#set.seed(42)
 
 library(gtools)
-#library(Boom)
 library(transport)
 library(MCMCpack)
 
-#The Prior Distribution is:
+#Value:
+#it returns a list with the proposed mean, variance, weights and number of components k.
+
 NormalInverseGamma <- function(){
 
   lambda = 2
@@ -49,12 +49,13 @@ NormalInverseGamma <- function(){
 
   }
   
-  #return (propMean)
   return(list(propMean,propVar,propWeight,K))
 
 }
 
-# We try to consider independent the normal and the inverse-gamma
+#Value:
+#it returns a list with the proposed mean, variance, weights and number of components k.
+
 Normal_ind_InverseGamma <- function(){
 
   lambda = 2
@@ -86,7 +87,6 @@ Normal_ind_InverseGamma <- function(){
 
   }
   
-  #return (propMean)
   return(list(propMean,propVar,propWeight,K))
 
 }

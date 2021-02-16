@@ -5,6 +5,13 @@
 #set.seed(42)
 library(wrswoR)
 
+#Arguments: 
+#numPts:         number of generated data
+#ThetaProposed   parameters of the proposed 2-D gaussian mixture
+
+#Value:
+#it returns the data generated from the specified mixture
+
 Model_Likelihood_2D <- function(numPts,ThetaProposed) { 
  
   out = matrix(data=NA,numPts,2)
@@ -12,7 +19,6 @@ Model_Likelihood_2D <- function(numPts,ThetaProposed) {
   for(i in 1:numPts){
 
     k = sample_int_crank(length(ThetaProposed[[3]]),1,ThetaProposed[[3]])
-    # k = sample.int(length(ThetaProposed[[3]]), 1L, prob=ThetaProposed[[3]])
     out[i,] = mvrnorm(1, ThetaProposed[[1]][[k]], ThetaProposed[[2]][[k]])
 
   }

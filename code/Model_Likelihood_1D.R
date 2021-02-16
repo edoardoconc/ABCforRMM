@@ -4,6 +4,12 @@
 
 #set.seed(42)
 
+#Arguments: 
+#numPts:         number of generated data
+#ThetaProposed   parameters of the proposed gaussian mixture
+
+#Value:
+#it returns the data generated from the specified mixture
 
 Model_Likelihood_1D <- function(numPts,ThetaProposed) { 
  
@@ -17,6 +23,4 @@ Model_Likelihood_1D <- function(numPts,ThetaProposed) {
   }
 
   return(dataGen)  
-  #return(rnorm(numPts, mean = ThetaProposed[1], sd = ThetaProposed[2]))
-
 }

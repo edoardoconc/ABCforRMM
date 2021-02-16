@@ -1,12 +1,17 @@
+#Arguments:
+#SampledPosteriorwithABC:   is the output of RejectionSamplingABC_1D
+#Yobs:                      observed data
+#tol:                       tollerance
 
-PostProcessing_2d <- function(SampledPosteriorWithABC,Yobs,tol=0.002,k=NULL,x_min=-16,x_max=16,breaks=70) {
+#the function will plot the contour of the mean and the scatterplot of the generated data
+
+PostProcessing_2d <- function(SampledPosteriorWithABC,Yobs,tol=0.002,k=2,x_min=-16,x_max=16,breaks=70) {
   load("LapRepulsive200K.Rdata")
   
   outDF = do.call("rbind", SampledPosteriorWithABC)
   
-  out<-outDF[which(outDF[,5]<= quantile(unlist(outDF[,5]),0.05)),]
+  out<-outDF[which(outDF[,5]<= quantile(unlist(outDF[,5]),0.0005)),]
   out = as.data.frame(out, nrow = length(out[,1]), ncol =5, byrow = TRUE)
-  k=2
   usare<-out[which(out$sampledNumOfMixComp == k),]
   medie<-usare[1]
   xy<-matrix(data=NA,nrow=(length(unlist(medie))/2),ncol = 2)

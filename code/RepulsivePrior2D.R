@@ -9,8 +9,13 @@ library(transport)
 library(MCMCpack)
 library(spatstat)
 
-#The Prior Distribution is:
-RepulsivePrior2D <- function(type){
+#Arguments:
+#type:       possible types: StraussProcess PenttinenProcess DiggleGrattonProcess. If is not one of these it will do the NIG version
+
+#Value:
+#it returns a list with the proposed mean, variance, weights and number of components k.
+
+RepulsivePrior2D <- function(type){ 
   
   if(type == "StraussProcess"){
     
@@ -26,7 +31,7 @@ RepulsivePrior2D <- function(type){
     propMean <- lapply(seq_len(nrow(tmp)), function(i) tmp[i,])
     
     K           <- outStrauss$n
-    propWeight  <- rdirichlet(1, rep(1,K))
+    propWeight  <- MCMCpack::rdirichlet(1, rep(1,K))
     
     nu0DegOfFreedom = 2
     scaleMatrix = matrix(c(1,0,0,1),2,2)
@@ -56,7 +61,7 @@ RepulsivePrior2D <- function(type){
     propMean <- lapply(seq_len(nrow(tmp)), function(i) tmp[i,])
 
     K           <- outPenttinen$n
-    propWeight  <- rdirichlet(1, rep(1,K))
+    propWeight  <- MCMCpack::rdirichlet(1, rep(1,K))
     
     nu0DegOfFreedom = 2
     scaleMatrix = matrix(c(1,0,0,1),2,2)
@@ -87,7 +92,7 @@ RepulsivePrior2D <- function(type){
     
     K           <- outDiggleGratton$n
     
-    propWeight  <- rdirichlet(1, rep(1,K))
+    propWeight  <- MCMCpack::rdirichlet(1, rep(1,K))
     
     nu0DegOfFreedom = 2
     scaleMatrix = matrix(c(1,0,0,1),2,2)

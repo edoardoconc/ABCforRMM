@@ -1,9 +1,21 @@
+#Arguments:
+#SampledPosteriorwithABC:   is the output of RejectionSamplingABC_1D
+#Yobs:                      observed data
+#tol:                       tollerance
+#k:                         number of components to analize, if NULL it will select the most accepted k
 
-PostProcessing_1d <- function(SampledPosteriorWithABC,Yobs,tol=0.002,k=NULL,x_min=-16,x_max=16,breaks=70) {
+#Value:
+#the function plots the traceplot and the histogram of the mean, the frequency of K and the density estimate. 
+
+PostProcessing_1d <- function(SampledPosteriorWithABC,Yobs,tol=0.002,k=NULL,sum_stat=1,x_min=-16,x_max=16,breaks=70) {
   
+if(sum_stat==0){
+out<-SampledPosteriorWithABC[which(SampledPosteriorWithABC$WassDist <= 
+                 quantile(unlist(SampledPosteriorWithABC$WassDist),tol)),]
+}else{
 out<-SampledPosteriorWithABC[which(SampledPosteriorWithABC$SampleQuantileDist <= 
                  quantile(unlist(SampledPosteriorWithABC$SampleQuantileDist),tol)),]
-
+}
 sMean = list(0)
 sVar = list(0)
 sWeight = list(0)

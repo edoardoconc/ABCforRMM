@@ -17,9 +17,18 @@
 
 source("Model_Likelihood_1D.R")
 source("NormalInverseGammaPrior.R")
-source("RepulsivePrior.R")
 source("Prior_Distr.R")
+source("summaryStatisticsImplementation_1D.R")
 
+#Arguments:
+#Yobs:                observed data
+#iter:                number of iterations
+#sum_stat:            1 for the distance on the summary statistics and 0 for the wasserstein distance
+#init:                initial value
+#prior_type:          possible types: non-repulsive: "NIG", repulsive: "StraussProcess", "PenttinenProcess", "DiggleGrattonProcess"
+ 
+#Value:
+#it returns a data frame with the sampled mean, variance, weights, number of mixed components, selected distances. 
 
 RejectionSamplingABC_1D <- function(Yobs, iter, sum_stat, init, prior_type) {
   
@@ -55,9 +64,9 @@ RejectionSamplingABC_1D <- function(Yobs, iter, sum_stat, init, prior_type) {
     SampleVarDist           = vector (length = iter, mode = "numeric")
     SampleQuantileDist      = vector (length = iter, mode = "numeric")
 
-    SampleMeanDist[1]       = computeNormOfSummaryStat(Model_Likelihood_1D(length(Yobs),ThetaProposedZero),Yobs,1)
-    SampleVarDist[1]        = computeNormOfSummaryStat(Model_Likelihood_1D(length(Yobs),ThetaProposedZero),Yobs,2)
-    SampleQuantileDist[1]   = computeNormOfSummaryStat(Model_Likelihood_1D(length(Yobs),ThetaProposedZero),Yobs,3)
+    SampleMeanDist[1]       = computeNormOfSummaryStat1D(Model_Likelihood_1D(length(Yobs),ThetaProposedZero),Yobs,1)
+    SampleVarDist[1]        = computeNormOfSummaryStat1D(Model_Likelihood_1D(length(Yobs),ThetaProposedZero),Yobs,2)
+    SampleQuantileDist[1]   = computeNormOfSummaryStat1D(Model_Likelihood_1D(length(Yobs),ThetaProposedZero),Yobs,3)
 
   }
   
@@ -66,8 +75,7 @@ RejectionSamplingABC_1D <- function(Yobs, iter, sum_stat, init, prior_type) {
 
   for(i in 2:iter){
 
-    #ThetaProposed = RepulsivePrior(prior_type)
-    ThetaProposed = Prior_Distr(prior_type, )
+    ThetaProposed = Prior_Distr (type=prior_type,rand_lambda=TRUE)
     
     Y = Model_Likelihood_1D(length(Yobs),ThetaProposed)
     
@@ -83,9 +91,9 @@ RejectionSamplingABC_1D <- function(Yobs, iter, sum_stat, init, prior_type) {
     }
     if (sum_stat == 1){
 
-      SampleMeanDist[i]     = computeNormOfSummaryStat(Y,Yobs,1)
-      SampleVarDist[i]      = computeNormOfSummaryStat(Y,Yobs,2)
-      SampleQuantileDist[i] = computeNormOfSummaryStat(Y,Yobs,3)
+      SampleMeanDist[i]     = computeNormOfSummaryStat1D(Y,Yobs,1)
+      SampleVarDist[i]      = computeNormOfSummaryStat1D(Y,Yobs,2)
+      SampleQuantileDist[i] = computeNormOfSummaryStat1D(Y,Yobs,3)
 
     }
     

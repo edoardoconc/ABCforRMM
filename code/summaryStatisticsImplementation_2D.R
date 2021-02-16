@@ -1,12 +1,15 @@
-#setwd("~/Documents/1university/Magistrale/Anno 2/Primo Semestre/Bayesian Statistics/Project/RCode")
-#rm(list = ls())
 
-set.seed(42)
 source("slicedWass.R")
 
-############ List of summary stats: 1 for mean, 2 for standard deviation, 3 for ... 
+#Arguments:
+#Y:                            generated data
+#Yobs:                         observed data
+#numberOfSummaryStatInList     List of summary stats: 1 for mean, 2 for standard deviation, 3 for equispaced quantiles, 4 for sliced Wasserstein
 
-computeNormOfSummaryStat <-function(Y,Yobs, numberOfSummaryStatInList){
+#Value:
+#it returns the value of the selected distance between the 2 data.
+
+computeNormOfSummaryStat2D <-function(Y,Yobs, numberOfSummaryStatInList){
   if(numberOfSummaryStatInList == 1){
     computedSummaryStat = abs(mean(Y)-mean(Yobs))
   }

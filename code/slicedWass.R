@@ -2,6 +2,13 @@
 
 library(transport)
 
+#Arguments:
+#Y:         Generated data
+#Yobs:      Observed data
+
+#Value:
+#it returns the value of the sliced Wasserstein between the 2 data.
+
 slicedWass <- function (Y,Yobs){
 
   n=10

@@ -1,3 +1,12 @@
+
+#Arguments:
+#data_set:    the output of RejectionSamplingABC_1D, with the same K for each data
+#K:           number of components of the muxture considerated
+
+#Value:
+#it returns a data frame with the Sample mean, variance, weights and number of components.
+#Furthermore it wil order the data set in such a way that for every theta proposed, the mean will be ascending.
+
 sorted_data_frame <- function(data_set,K){
   medie<-matrix(data=NA,nrow=dim(data_set)[1],ncol = K)
   varianze<-matrix(data=NA,nrow=dim(data_set)[1],ncol = K)

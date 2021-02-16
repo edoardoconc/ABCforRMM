@@ -12,7 +12,17 @@ library(transport)
 library(MCMCpack)
 library(spatstat)
 
-#The Prior Distribution is:
+#Arguments:
+#type:                possible types: NIG StraussProcess PenttinenProcess DiggleGrattonProcess
+#lambda:              parameter of the poisson distribution
+#rand_lambda          If TRUE, it will generate lambda from a discrete uniform between min_lambda and max_lambda
+#shape:               shape
+#scale:               scale
+#mu,sigma...          parameters of the distributions
+
+#Value:
+#it returns a list with the proposed mean, variance, weights and number of components k.
+
 Prior_Distr <- function(type,lambda=2,shape=0.5,scale=1,mu=0,sigma=7,beta=NULL,W=owin(c(-10,10),c(-10,10)),gamma=1,R=0.3,delta=0.85,rho=0.9,rand_lambda=FALSE,min_lambda=1,max_lambda=8){
   
   if(type=="NIG"){
@@ -23,14 +33,14 @@ Prior_Distr <- function(type,lambda=2,shape=0.5,scale=1,mu=0,sigma=7,beta=NULL,W
     #mu = 0
     #sigma = 7
     if (rand_lambda==TRUE){
-      lambda<-rdunif(n=1,min=min_lambda,max=max_lambda)
+      lambda<-extraDistr::rdunif(n=1,min=min_lambda,max=max_lambda)
     }
     K <- rpois(1, lambda)+1
     
     if(K==1){
       propWeight<-1
     }else{
-    propWeight <- rdirichlet(1, rep(1,K))}
+    propWeight <- MCMCpack::rdirichlet(1, rep(1,K))}
     propVar <- rinvgamma(K, shape, scale)
     propMean = list(0)
     
@@ -68,7 +78,7 @@ Prior_Distr <- function(type,lambda=2,shape=0.5,scale=1,mu=0,sigma=7,beta=NULL,W
     if(K==1){
       propWeight<-1
     }else{
-      propWeight <- rdirichlet(1, rep(1,K))}
+      propWeight <- MCMCpack::rdirichlet(1, rep(1,K))}
     propVar <- rinvgamma(K, shape, scale)
     
     return(list(propMean,propVar,propWeight,K))
@@ -96,7 +106,7 @@ Prior_Distr <- function(type,lambda=2,shape=0.5,scale=1,mu=0,sigma=7,beta=NULL,W
     if(K==1){
       propWeight<-1
     }else{
-      propWeight <- rdirichlet(1, rep(1,K))}
+      propWeight <- MCMCpack::rdirichlet(1, rep(1,K))}
     propVar <- rinvgamma(K, shape, scale)
     
     return(list(propMean,propVar,propWeight,K))
@@ -124,7 +134,7 @@ Prior_Distr <- function(type,lambda=2,shape=0.5,scale=1,mu=0,sigma=7,beta=NULL,W
     if(K==1){
       propWeight<-1
     }else{
-      propWeight <- rdirichlet(1, rep(1,K))}
+      propWeight <- MCMCpack::rdirichlet(1, rep(1,K))}
     propVar <- rinvgamma(K, shape, scale)
     
     return(list(propMean,propVar,propWeight,K))

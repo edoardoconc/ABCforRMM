@@ -1,6 +1,19 @@
 # Generation of the default dataset
 
-#library(extraDistr)
+library(extraDistr)
+rdirichlet<-MCMCpack::rdirichlet
+
+#Arguments:
+#dimension:                        dimension of the data
+#type:                             possible types: gauss tds laplace
+#n:                                number of generated data
+#components:                       number of components of the mixture
+#weights:                          weights of the components of the mixture
+#mean,sd,dof,sigma,mean2d,var2d    parameters of the selected distribution
+
+#Value:
+#it returns a matrix (n x dimension) with the generated data selected
+
 DataGeneration <- function(dimension,type,n,components,weights,mean=NULL,sd=NULL,dof=NULL,sigma=NULL,mean2d=NULL,var2d=NULL) {
   
   if (type!="gauss" & type!="tds" & type!="laplace"){
@@ -80,7 +93,7 @@ DataGeneration <- function(dimension,type,n,components,weights,mean=NULL,sd=NULL
       for (i in 1:n) {
 
         dummy<-sample.int(components,1,prob=weights)
-        Yobs[i] = extraDistr::rlaplace(1,mean[dummy],sigma[dummy])
+        Yobs[i]=extraDistr::rlaplace(1,mean[dummy],sigma[dummy])
 
       }
       

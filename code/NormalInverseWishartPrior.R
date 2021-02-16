@@ -16,7 +16,9 @@ library(gtools)
 library(transport)
 library(MCMCpack)
 
-#The Prior Distribution is:
+#Value:
+#it returns a list with the proposed mean, variance, weights and number of components k.
+
 NormalInverseWishartPrior <- function(){
 
   lambda = 2
