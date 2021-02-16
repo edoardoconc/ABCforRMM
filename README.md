@@ -35,5 +35,5 @@ In the code directory you can find all the code: to run the sampler you just nee
 Below you can see the results obtained when running our sampler on a Gaussian Mixture using three different repulsive priors:
 
  <img src="images/forMD2.png" width="100%" height="50%">
- <img src="images/forMD3.png" width="50%" height="50%">
- <img src="images/forMD4.png" width="50%" height="50%">
+ <img src="images/forMD3.png" width="100%" height="50%">
+ <img src="images/forMD4.png" width="100%" height="50%">
