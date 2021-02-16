@@ -27,7 +27,7 @@ The entire code was written in R. The important packages we used are:
  
 ## Repo Structure
 
-In the code directory you can find all the code: to run the sampler you just need to open the main file, which is ABCForNormalMixture. In the images directory there are the pictures needed for the readme file, while in the data directory we uploaded some of the most meaniningful simulations.
+In the code directory you can find all the code: to run the sampler you just need to open the main file, which is ABCForNormalMixture. ABCForNormalMixture is divided in a editable section that process the parameter choice, in a section that run the sampler (RejectionSamplingABC) and in a section that compute the post-processing. In the images directory there are the pictures needed for the readme file, while in the data directory we uploaded some of the most meaniningful simulations.
 
 
 ## Results Overview
