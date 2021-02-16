@@ -16,7 +16,7 @@
 
 The aim of this project was to study ABC Sampling Techniques for repulsive mixture models in order to solve clustering problems. The code was developed in R considering incrementally more general problems. The most general model formulation is the following:
 
-![alt text](https://github.com/edoardoconc/ABCforRMM/images/forMD1.png)
+![alt text](images/forMD1.png)
 
 ### Packages
 
